@@ -1,0 +1,5 @@
+# General
+.vagrant/
+
+# Log files (if you are not creating logs in debug mode, comment this)
+*.log
