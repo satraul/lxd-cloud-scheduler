@@ -1,19 +1,22 @@
 # LXD Cloud Scheduler
 >LXD project by GO-SQUADS Tech Intern 2017
 
-A brief description of your project, what it is used for and how does life get
-awesome when someone starts to use it.
+This is the setup we are using for LXD team's project: LXD web interface and cloud scheduler.
 
 ## Installing / Getting started
 
-After cloning the repo, run this in the root:
+After cloning the repo, run this in root:
 
-```shell
+```bash
 sudo apt-get install virtualbox vagrant
 vagrant up
 ```
 
-And you're up and running.
+And you're up and running. To ssh into master:
+
+```bash
+vagrant ssh master
+```
 
 ## Developing
 
