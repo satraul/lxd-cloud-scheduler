@@ -2,23 +2,24 @@
 >LXD project by GO-SQUADS Tech Intern 2017
 
 This is the setup for LXD team's project.
+The Vagrantfile is configured to make 3 VMs (master + 2 nodes) in a dhcp private network.
+In each VM, LXD is initialized automatically using ```lxd init --preseed```
+See [Vagrantfile](Vagrantfile) and [preseed.yaml](preseed.yaml) for more details.
+As of now, the LXDs aren't connected yet.
 
 ## Installing / Getting started
 
+Prerequesites are VirtualBox and Vagrant. To install, please run:
+```bash
+sudo apt-get install virtualbox vagrant
+```
 After cloning, run this in the root of the repo:
-
 ```bash
-$ sudo apt-get install virtualbox vagrant
-$ vagrant up
-$ vagrant ssh master
+vagrant up
+vagrant ssh master
 ```
-
-```bash
-ubuntu@master $ sudo apt-get install lxd zfs bridge-utils
-ubuntu@master $ sudo lxd init
-```
-
-And press enter for everything. Now you're up and running. Try ```lxc list```.
+Done! To go into the master VM, run ```vagrant ssh master```
+Try  ```lxc list```
 
 ## Developing
 
@@ -28,9 +29,7 @@ cd lxd-cloud-scheduler/
 ```
 
 To-do list for automation:
-1. Create box/automate provisioning for bridge-utils and zfs
-2. Updating LXD to feature release (optional)
-3. Pressed file for lxd init --preseed
+1. Configure LXD bridge and tunneling between LXD hosts
 
 ## Licensing
 

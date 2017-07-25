@@ -1,0 +1,33 @@
+# Daemon settings
+config:
+  core.https_address: '[::]:8443'
+  core.trust_password: admin
+  images.auto_update_interval: 6
+
+# Storage pools
+storage_pools:
+- name: data
+  driver: zfs
+  config:
+    size: 256MB
+
+# Network devices
+networks:
+- name: lxdbr0
+  type: bridge
+  config:
+    ipv4.address: auto
+    ipv6.address: none
+
+# Profiles
+profiles:
+- name: default
+  config:
+    limits.cpu: 2
+    limits.memory: 256MB
+    limits.memory.swap: true
+  devices:
+    root:
+      path: /
+      pool: data
+      type: disk
