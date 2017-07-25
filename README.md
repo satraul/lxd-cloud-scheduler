@@ -5,12 +5,15 @@ This is the setup for LXD team's project.
 
 ## Installing / Getting started
 
-After cloning the repo, run this in root:
+After cloning, run this in the root of the repo:
 
 ```bash
 $ sudo apt-get install virtualbox vagrant
 $ vagrant up
 $ vagrant ssh master
+```
+
+```bash
 ubuntu@master $ sudo apt-get install lxd zfs bridge-utils
 ubuntu@master $ sudo lxd init
 ```
