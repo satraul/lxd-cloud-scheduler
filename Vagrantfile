@@ -8,7 +8,6 @@
 DEFAULT_BOX = "ubuntu/xenial64"
 NODE_COUNT = 2
 PRESEED = File.read("preseed.yaml")
-puts PRESEED
 
 Vagrant.configure("2") do |config|
   # The most common configuration options are documented and commented below.
@@ -24,7 +23,6 @@ Vagrant.configure("2") do |config|
         sudo apt install -qq -y -t xenial-backports lxd lxd-client
         echo "Running apt-get -qq -y install zfs"
         sudo apt-get -qq -y install zfs
-        echo "#{PRESEED}"
         echo "#{PRESEED}" | lxd init --preseed
     SHELL
   end
@@ -40,7 +38,6 @@ Vagrant.configure("2") do |config|
         sudo apt install -qq -y -t xenial-backports lxd lxd-client
         echo "Running apt-get -qq -y install zfs"
         sudo apt-get -qq -y install zfs
-        echo "#{PRESEED}"
         echo "#{PRESEED}" | lxd init --preseed
       SHELL
     end
