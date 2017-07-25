@@ -26,40 +26,8 @@ cd lxd-cloud-scheduler/
 
 To-do list for automation:
 1. Create box/automate provisioning for bridge-utils and zfs
-2. Upating LXD to feature release (optional)
-3. Creating a preseed file for lxd init --preseed
-
-## Licensing
-
-The code in this project is licensed under MIT license.
-
-## Developing
-
-```shell
-git clone https://github.com/satraul/lxd-cloud-scheduler.git
-cd lxd-cloud-scheduler/
-```
-
-To-do list for automation:
-1. Create box/automate provisioning for bridge-utils and zfs
-2. Upating LXD to feature release (optional)
-3. Creating a preseed file for lxd init --preseed
-
-## Licensing
-
-The code in this project is licensed under MIT license.
-
-## Developing
-
-```shell
-git clone https://github.com/satraul/lxd-cloud-scheduler.git
-cd lxd-cloud-scheduler/
-```
-
-To-do list for automation:
-1. Create box/automate provisioning for bridge-utils and zfs
-2. Upating LXD to feature release (optional)
-3. Creating a preseed file for lxd init --preseed
+2. Updating LXD to feature release (optional)
+3. Pressed file for lxd init --preseed
 
 ## Licensing
 
