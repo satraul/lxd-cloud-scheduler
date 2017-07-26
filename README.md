@@ -3,7 +3,7 @@
 
 This is the setup for LXD team's project.
 The Vagrantfile is configured to make 3 VMs (master + 2 nodes) in a dhcp private network.
-In each VM, LXD is initialized automatically using ```lxd init --preseed```
+In each VM, LXD is initialized automatically using ```lxd init --preseed```.
 See [Vagrantfile](Vagrantfile) and [preseed.yaml](preseed.yaml) for more details.
 As of now, the LXDs aren't connected yet.
 
@@ -11,14 +11,13 @@ As of now, the LXDs aren't connected yet.
 
 Prerequesites are VirtualBox and Vagrant. To install, please run:
 ```bash
-sudo apt-get install virtualbox vagrant
+sudo brew cask install virtualbox vagrant
 ```
 After cloning, run this in the root of the repo:
 ```bash
 vagrant up
-vagrant ssh master
 ```
-Done! To go into the master VM, run ```vagrant ssh master```
+Done! To go into the master VM, run ```vagrant ssh master```.
 Try  ```lxc list```
 
 ## Developing
