@@ -11,11 +11,11 @@ Vagrant.configure("2") do |config|
     subconfig.vm.hostname = "master"
     subconfig.vm.provision "shell", inline: <<-SHELL
         echo "Hello from master"
+        echo Installing ZFS
+        sudo apt-get install -qq -y zfs
         echo "Running apt install -qq -y -t xenial-backports lxd lxd-client"
         sudo apt install -qq -y -t xenial-backports lxd lxd-client
         echo "#{PRESEED}" | lxd init --preseed
-        echo Installing ZFS
-        sudo apt-get install -qq -y zfs
         echo Installing APACHE
         sudo apt-get install -qq -y apache2
         if ! [ -L /var/www ]; then
