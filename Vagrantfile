@@ -2,7 +2,8 @@
 # vi: set ft=ruby :
 
 DEFAULT_BOX = "ubuntu/xenial64"
-NODE_COUNT = 2
+# We actually need 2 nodes
+NODE_COUNT = 1
 PRESEED = File.read("preseed.yaml")
 
 Vagrant.configure("2") do |config|
@@ -15,13 +16,8 @@ Vagrant.configure("2") do |config|
         sudo apt-get install -qq -y zfs
         echo "Running apt install -qq -y -t xenial-backports lxd lxd-client"
         sudo apt install -qq -y -t xenial-backports lxd lxd-client
+        echo "Running lxd init --preseed"
         echo "#{PRESEED}" | lxd init --preseed
-        echo Installing APACHE
-        sudo apt-get install -qq -y apache2
-        if ! [ -L /var/www ]; then
-          rm -rf /var/www
-          ln -fs /vagrant /var/www
-        fi
     SHELL
   end
 

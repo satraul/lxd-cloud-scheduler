@@ -6,10 +6,11 @@ config:
 
 # Storage pools
 storage_pools:
-- name: data
+- name: default
   driver: zfs
   config:
-    size: 256MB
+    size: 15GB
+    source: zfs-pool/zfs-dataset
 
 # Network devices
 networks:
@@ -29,5 +30,5 @@ profiles:
   devices:
     root:
       path: /
-      pool: data
+      pool: default
       type: disk
