@@ -27,10 +27,10 @@ Vagrant.configure("2") do |config|
       subconfig.vm.hostname = "node-#{i}"
       subconfig.vm.provision "shell", inline: <<-SHELL
         echo "Hello from node #{i}"
-        echo "Running apt install -qq -y -t xenial-backports lxd lxd-client"
-        sudo apt install -qq -y -t xenial-backports lxd lxd-client
         echo "Running apt-get -qq -y install zfs"
         sudo apt-get -qq -y install zfs
+        echo "Running apt install -qq -y -t xenial-backports lxd lxd-client"
+        sudo apt install -qq -y -t xenial-backports lxd lxd-client
         echo "#{PRESEED}" | lxd init --preseed
       SHELL
     end

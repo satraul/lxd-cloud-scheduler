@@ -10,7 +10,7 @@ storage_pools:
   driver: zfs
   config:
     size: 15GB
-    source: zfs-pool/zfs-dataset
+    source:
 
 # Network devices
 networks:
