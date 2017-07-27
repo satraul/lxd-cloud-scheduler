@@ -3,3 +3,7 @@
 
 # Log files (if you are not creating logs in debug mode, comment this)
 *.log
+
+# Client certficate files
+client.crt
+client.key
