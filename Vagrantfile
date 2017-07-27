@@ -23,8 +23,12 @@ Vagrant.configure("2") do |config|
     echo "Installing LXD feature branch (2.X)"
     sudo apt install -qq -y -t xenial-backports lxd lxd-client
 
-    echo "Running lxd init with --preseed"
-    echo "#{PRESEED}" | lxd init --preseed
+    if $(sudo lxc config get core.trust_password) ; then
+        echo "LXD already initialized"
+    else
+        echo "Running lxd init with --preseed"
+        echo "#{PRESEED}" | lxd init --preseed
+    fi
   SHELL
 
   config.vm.define "master" do |subconfig|
@@ -32,9 +36,11 @@ Vagrant.configure("2") do |config|
     subconfig.vm.hostname = "master"
     subconfig.vm.provision "shell", inline: <<-SHELL
         echo "Running provisions for master"
-        sudo openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout ~/.config/lxc/client.key -out ~/.config/lxc/client.crt -batch
-        sudo cp .config/lxc/client.crt /vagrant/
-        sudo cp .config/lxc/client.key /vagrant/
+        sudo openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout /home/ubuntu/.config/lxc/client.key -out /home/ubuntu/.config/lxc/client.crt -batch
+        
+        echo "Copying certficate and key to root"
+        sudo cp /home/ubuntu/.config/lxc/client.key /vagrant/
+        sudo cp /home/ubuntu/.config/lxc/client.crt /vagrant/
     SHELL
   end
 
