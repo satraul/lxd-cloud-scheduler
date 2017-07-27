@@ -36,8 +36,9 @@ Vagrant.configure("2") do |config|
     subconfig.vm.hostname = "master"
     subconfig.vm.provision "shell", inline: <<-SHELL
         echo "Running provisions for master"
-        sudo openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout /home/ubuntu/.config/lxc/client.key -out /home/ubuntu/.config/lxc/client.crt -batch
-        
+        echo "Creating certificate and key quietly"
+        sudo lxc list > /dev/null 2>&1
+        sudo openssl req -q -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout /home/ubuntu/.config/lxc/client.key -out /home/ubuntu/.config/lxc/client.crt -batch > /dev/null 2>&1
         echo "Copying certficate and key to root"
         sudo cp /home/ubuntu/.config/lxc/client.key /vagrant/
         sudo cp /home/ubuntu/.config/lxc/client.crt /vagrant/
