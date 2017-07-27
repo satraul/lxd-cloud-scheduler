@@ -32,6 +32,9 @@ Vagrant.configure("2") do |config|
     subconfig.vm.hostname = "master"
     subconfig.vm.provision "shell", inline: <<-SHELL
         echo "Running provisions for master"
+        sudo openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout ~/.config/lxc/client.key -out ~/.config/lxc/client.crt -batch
+        sudo cp .config/lxc/client.crt /vagrant/
+        sudo cp .config/lxc/client.key /vagrant/
     SHELL
   end
 
