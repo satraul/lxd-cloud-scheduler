@@ -7,7 +7,7 @@ NODE_COUNT = 1
 ENV["LC_ALL"] = "en_US.UTF-8"
 
 Vagrant.configure("2") do |config|
-  config.vm.network "private_network", type: "dhcp"
+  config.vm.network "public_network", type: "dhcp"
 
   config.vm.provider "virtualbox" do |vb|
     vb.memory = 1024
