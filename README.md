@@ -2,7 +2,7 @@
 >LXD project by GO-SQUADS Tech Intern 2017
 
 This is the setup for LXD team's project.
-The Vagrantfile is configured to make 3 VMs (master + 2 nodes) in a dhcp private network.
+The Vagrantfile is configured to make a master VM + a number of nodes (according to NODE_COUNT in) in a DHCP private network.
 In each VM, LXD is initialized automatically using ```lxd init --preseed```.
 See [Vagrantfile](Vagrantfile) and [preseed.yaml](preseed.yaml) for more details.
 As of now, the LXDs aren't connected yet.
@@ -27,7 +27,8 @@ After cloning, run this in the root of the repo:
 $ vagrant up
 ```
 Done! To go into the master VM, run ```vagrant ssh master```. ```exit``` to get out.
-To try to access the API from outside, run ```curl -k --http2 --cert client.crt --key client.key https://172.28.128.3:8443/1.0 -X GET```.
+To authenticate through the API run ```curl -k --cert client.crt --key client.key https://172.28.128.10:8443/1.0/certificates -X POST -d '{"type": "client", "password": "admin"}'```
+Now you can access the API. Try ```curl -k --http2 --cert client.crt --key client.key https://172.28.128.3:8443/1.0 -X GET```.
 Replace the IP with the correct one from ```ifconfig``` (inside the VM).
 
 ## Developing
@@ -38,7 +39,7 @@ $ cd lxd-cloud-scheduler/
 ```
 
 To-do list for automation:
-1. Configure LXD bridge and tunneling between LXD hosts
+1. Configure tunneling between LXD hosts
 
 ## Licensing
 
