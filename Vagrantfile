@@ -7,6 +7,7 @@ NODE_COUNT = 2
 ENV["LC_ALL"] = "en_US.UTF-8"
 
 Vagrant.configure("2") do |config|
+  # Set VM RAM and CPU
   config.vm.provider "virtualbox" do |vb|
     host = RbConfig::CONFIG['host_os']
 
@@ -26,19 +27,32 @@ Vagrant.configure("2") do |config|
     vb.cpus = 2
   end
 
-  config.vm.provision "shell", path: "provisioners/general.sh"
-  config.vm.synced_folder '.', '/vagrant/', nfs: true
+  # Network and folder sync
+  config.vm.synced_folder 'nfs', '/vagrant', nfs: true
   config.vm.network "private_network", type: "dhcp"
 
+  # Master
   config.vm.define "master" do |subconfig|
     subconfig.vm.box = DEFAULT_BOX
     subconfig.vm.hostname = "master"
+
+    # Chef provisioning using vagrant-berkshelf plugin
+    subconfig.vm.provision "chef_solo" do |chef|
+      chef.cookbooks_path = ["vendor/cookbooks", "cookbooks"]
+      chef.roles_path = "roles"
+      chef.add_role("master")
+    end
   end
 
+  # Nodes
   (1..NODE_COUNT).each do |i|
     config.vm.define "node-#{i}" do |subconfig|
       subconfig.vm.box = DEFAULT_BOX
       subconfig.vm.hostname = "node-#{i}"
+      subconfig.vm.provision "chef_solo" do |chef|
+        chef.roles_path = "roles"
+        chef.add_role("node")
+      end
     end
   end
 end

@@ -1,0 +1,13 @@
+{
+    "name": "node",
+    "description": "Role for nodes that host LXD servers",
+    "chef_type": "role",
+    "json_class": "Chef::Role",
+    "default_attributes": {
+    },
+    "override_attributes": {
+    },
+    "run_list": [
+        "recipe[lxd]"
+    ]
+}

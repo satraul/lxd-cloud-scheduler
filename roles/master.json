@@ -1,0 +1,13 @@
+{
+    "name": "master",
+    "description": "Role for master including Rails, Redis and Resque",
+    "chef_type": "role",
+    "json_class": "Chef::Role",
+    "default_attributes": {
+    },
+    "override_attributes": {
+    },
+    "run_list": [
+        "recipe[lxd_web_interface]"
+    ]
+}
