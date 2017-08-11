@@ -7,4 +7,10 @@ long_description 'Installs/Configures lxd_web_interface'
 version '0.1.0'
 chef_version '>= 12.1' if respond_to?(:chef_version)
 
-depends 'application_ruby'
+depends 'apt'
+depends 'system'
+depends 'build-essential'
+depends 'ruby_build'
+depends 'ruby_rbenv'
+depends 'postgresql'
+depends 'nodejs'

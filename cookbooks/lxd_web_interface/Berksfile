@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 source 'https://supermarket.chef.io'
 
-cookbook 'application_ruby', '~> 4.1.0'
+cookbook 'apt'
+cookbook 'system'
+cookbook 'build-essential'
+cookbook 'ruby_build'
+cookbook 'ruby_rbenv'
+cookbook 'postgresql'
+cookbook 'nodejs'
 
 metadata

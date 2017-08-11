@@ -1,0 +1,58 @@
+{
+  "rbenv": {
+    "user_installs": [
+      {
+        "user": "ubuntu",
+        "rubies": [
+          "2.4.1"
+        ],
+        "global": "2.4.1",
+        "gems": {
+          "2.4.1": [
+            {
+              "name": "bundler"
+            },
+            {
+              "name": "rails"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "system": {
+    "packages": {
+      "install": [
+        "redis-server",
+        "nodejs",
+        "libpq-dev"
+      ]
+    }
+  },
+  "postgresql": {
+    "password": {
+      "postgres": "admin"
+    },
+    "pg_hba": [
+      {
+        "type": "local",
+        "db": "all",
+        "user": "ubuntu",
+        "addr": null,
+        "method": "trust"
+      }
+    ],
+    "users": [
+      {
+        "username": "ubuntu",
+        "password": "",
+        "superuser": true,
+        "replication": false,
+        "createdb": true,
+        "createrole": false,
+        "inherit": false,
+        "login": true
+      }
+    ]
+  }
+}

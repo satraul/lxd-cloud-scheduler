@@ -3,7 +3,7 @@
 
 DEFAULT_BOX = "ubuntu/xenial64"
 # We actually need 2 nodes
-NODE_COUNT = 2
+NODE_COUNT = 0
 ENV["LC_ALL"] = "en_US.UTF-8"
 
 Vagrant.configure("2") do |config|
@@ -35,12 +35,14 @@ Vagrant.configure("2") do |config|
   config.vm.define "master" do |subconfig|
     subconfig.vm.box = DEFAULT_BOX
     subconfig.vm.hostname = "master"
+    subconfig.vm.network "forwarded_port", guest: 3000, host: 8080
 
-    # Chef provisioning using vagrant-berkshelf plugin
+    # Provisioning using chef-solo
     subconfig.vm.provision "chef_solo" do |chef|
       chef.cookbooks_path = ["vendor/cookbooks", "cookbooks"]
       chef.roles_path = "roles"
       chef.add_role("master")
+      chef.json = JSON.parse(File.read('roles/master_attr.json'))
     end
   end
 

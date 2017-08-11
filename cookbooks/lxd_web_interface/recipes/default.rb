@@ -3,15 +3,19 @@
 # Recipe:: default
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
-apt_repository 'rael-gc' do
-  uri 'ppa:rael-gc/rvm'
-  deb_src true
-  action :add
+
+version = '2.4.1'
+
+# Install Rbenv Globally
+rbenv_system_install 'system'
+
+# Install a Ruby version
+rbenv_ruby version do
+  verbose true
 end
 
-package 'rvm' do
-  action :install
-end
+# Set that Ruby as the global Ruby
+rbenv_global version
 
 git '/home/ubuntu/hyperkit' do
   repository 'https://github.com/satraul/hyperkit.git'
@@ -23,27 +27,8 @@ git '/home/ubuntu/lxd-web-interface' do
   action :sync
 end
 
-application '/home/ubuntu/lxd-web-interface' do
-  bundle_install do
-    action :update
-  end
-  bundle_install do
-    deployment true
-    without %w{development test}
-  end
-  rails do
-    database do
-      adapter 'postgresql'
-      host 'localhost'
-      username 'lxd'
-      password 'admin'
-      database 'lxd-web-interface'
-    end
-    secret_token 'd78fe08df56c9'
-    migrate true
-  end
-  puma do
-    port 8000
-  end
-  action :deploy
+execute "bundle install" do
+  cwd "/home/ubuntu/lxd-web-interface/"
+  command "bundle install"
+  action :run
 end
