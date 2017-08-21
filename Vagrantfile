@@ -3,7 +3,7 @@
 
 DEFAULT_BOX = "ubuntu/xenial64"
 # We actually need 2 nodes
-NODE_COUNT = 0
+NODE_COUNT = 1
 ENV["LC_ALL"] = "en_US.UTF-8"
 
 Vagrant.configure("2") do |config|

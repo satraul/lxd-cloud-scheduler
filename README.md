@@ -26,10 +26,13 @@ After cloning, run this in the root of the repo:
 ```bash
 $ vagrant up
 ```
+
 Done! To go into the master VM, run ```vagrant ssh master```. ```exit``` to get out.
-To authenticate through the API run ```curl -k --cert client.crt --key client.key https://172.28.128.10:8443/1.0/certificates -X POST -d '{"type": "client", "password": "admin"}'```
-Now you can access the API. Try ```curl -k --http2 --cert client.crt --key client.key https://172.28.128.3:8443/1.0 -X GET```.
-Replace the IP with the correct one from ```ifconfig``` (inside the VM).
+The ```master``` VM is for running the Rails app. Actual LXDs are run on the nodes (node-n, e.g ```node-1```).
+You can access the LXD API through through ```https://NODE_IP:8443/```.
+To authenticate through the API run ```curl -k --cert client.crt --key client.key https://NODE_IP:8443/1.0/certificates -X POST -d '{"type": "client", "password": "admin"}'```
+Now you can access the API. Try ```curl -k --http2 --cert client.crt --key client.key https://NODE_IP:8443/1.0 -X GET```.
+Replace the IP with the correct one from ```ifconfig``` (inside the node VM).
 
 ## Developing
 
