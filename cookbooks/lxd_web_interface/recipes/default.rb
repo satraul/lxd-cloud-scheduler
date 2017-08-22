@@ -17,9 +17,10 @@ end
 # Set that Ruby as the global Ruby
 rbenv_global version
 
-git '/home/ubuntu/hyperkit' do
-  repository 'https://github.com/satraul/hyperkit.git'
-  action :sync
+['bundler', 'rails'].each do |gem|
+    gem_package gem do
+        action :upgrade
+    end
 end
 
 git '/home/ubuntu/lxd-web-interface' do
