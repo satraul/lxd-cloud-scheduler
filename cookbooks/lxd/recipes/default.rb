@@ -4,13 +4,7 @@
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
 
-execute "apt-get-update" do
-  command "apt-get update"
-end
-
-package 'npm' do
-    action :upgrade
-end
+execute "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
 
 package 'nodejs' do
     action :upgrade
