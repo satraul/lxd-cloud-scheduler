@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
         config.vm.define "node-#{i}" do |subconfig|
             subconfig.vm.box = DEFAULT_BOX
             subconfig.vm.hostname = "node-#{i}"
-            subconfig.vm.synced_folder 'shared/node', '/vagrant', nfs: true
+            subconfig.vm.synced_folder 'shared/node', '/vagrant'
             subconfig.vm.provision "chef_solo" do |chef|
                 chef.roles_path = "roles"
                 chef.add_role("node")
