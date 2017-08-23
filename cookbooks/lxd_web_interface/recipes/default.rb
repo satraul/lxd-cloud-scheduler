@@ -30,7 +30,7 @@ end
 
 ['bundle install', 'rake db:setup'].each do |cmd|
     execute cmd do
-        cwd "/home/ubuntu/lxd-web-interface/"
+        cwd '/home/ubuntu/lxd-web-interface/'
         action :run
     end
 end

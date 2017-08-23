@@ -55,7 +55,11 @@ Vagrant.configure("2") do |config|
             subconfig.vm.box = DEFAULT_BOX
             subconfig.vm.hostname = "node-#{i}"
             subconfig.vm.synced_folder 'shared/node', '/vagrant'
+            subconfig.vm.network "forwarded_port", guest: 3000, host: 5010, protocol: 'tcp'
+            subconfig.vm.network "forwarded_port", guest: 3000, host: 5010, protocol: 'udp'
+
             subconfig.vm.provision "chef_solo" do |chef|
+                chef.cookbooks_path = ["vendor/cookbooks", "cookbooks"]
                 chef.roles_path = "roles"
                 chef.add_role("node")
             end

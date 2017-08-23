@@ -12,7 +12,6 @@
         "recipe[build-essential]",
         "recipe[system::install_packages]",
         "recipe[postgresql::server]",
-        "recipe[postgresql::client]",
         "recipe[lxd_web_interface]"
     ]
 }
