@@ -11,7 +11,7 @@ rbenv_system_install 'system'
 
 # Install a Ruby version
 rbenv_ruby version do
-  verbose true
+    verbose true
 end
 
 # Set that Ruby as the global Ruby
@@ -24,12 +24,14 @@ rbenv_global version
 end
 
 git '/home/ubuntu/lxd-web-interface' do
-  repository 'https://github.com/rimara/lxd-web-interface.git'
-  action :sync
+    repository 'https://github.com/rimara/lxd-web-interface.git'
+    action :sync
 end
 
-execute "bundle install" do
-  cwd "/home/ubuntu/lxd-web-interface/"
-  command "bundle install"
-  action :run
+['bundle install', 'rake db:setup'].each do |cmd|
+    execute cmd do
+        cwd "/home/ubuntu/lxd-web-interface/"
+        action :run
+    end
 end
+

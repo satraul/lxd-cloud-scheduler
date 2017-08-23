@@ -2,8 +2,9 @@
 # vi: set ft=ruby :
 
 DEFAULT_BOX = "ubuntu/xenial64"
-# We actually need 2 nodes
-NODE_COUNT = 1
+ENABLE_WEB_INTERFACE = false
+# We actually need 3 nodes
+NODE_COUNT = 2
 ENV["LC_ALL"] = "en_US.UTF-8"
 
 Vagrant.configure("2") do |config|
@@ -27,30 +28,33 @@ Vagrant.configure("2") do |config|
         vb.cpus = 2
     end
 
-    # Network and folder sync
-    config.vm.synced_folder 'nfs', '/vagrant', nfs: true
+    # Network
     config.vm.network "private_network", type: "dhcp"
 
-    # Master
-    config.vm.define "master" do |subconfig|
-        subconfig.vm.box = DEFAULT_BOX
-        subconfig.vm.hostname = "master"
-        subconfig.vm.network "forwarded_port", guest: 3000, host: 8080
+    # Web interface
+    if ENABLE_WEB_INTERFACE
+        config.vm.define "web-interface" do |subconfig|
+            subconfig.vm.box = DEFAULT_BOX
+            subconfig.vm.hostname = "web-interface"
+            # subconfig.vm.synced_folder 'shared/web-interface', '/vagrant', nfs: true
+            subconfig.vm.network "forwarded_port", guest: 3000, host: 8080
 
-        # Provisioning using chef-solo
-        subconfig.vm.provision "chef_solo" do |chef|
-            chef.cookbooks_path = ["vendor/cookbooks", "cookbooks"]
-            chef.roles_path = "roles"
-            chef.add_role("master")
-            chef.json = JSON.parse(File.read('roles/master_attr.json'))
+            # Provisioning using chef-solo
+            subconfig.vm.provision "chef_solo" do |chef|
+                chef.cookbooks_path = ["vendor/cookbooks", "cookbooks"]
+                chef.roles_path = "roles"
+                chef.add_role("web-interface")
+                chef.json = JSON.parse(File.read('roles/web-interface-attributes.json'))
+            end
         end
     end
 
-    # Nodes
+    # LXD nodes
     (1..NODE_COUNT).each do |i|
         config.vm.define "node-#{i}" do |subconfig|
             subconfig.vm.box = DEFAULT_BOX
             subconfig.vm.hostname = "node-#{i}"
+            subconfig.vm.synced_folder 'shared/node', '/vagrant', nfs: true
             subconfig.vm.provision "chef_solo" do |chef|
                 chef.roles_path = "roles"
                 chef.add_role("node")

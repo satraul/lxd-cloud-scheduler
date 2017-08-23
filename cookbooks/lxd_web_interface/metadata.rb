@@ -10,7 +10,6 @@ chef_version '>= 12.1' if respond_to?(:chef_version)
 depends 'apt'
 depends 'system'
 depends 'build-essential'
-depends 'ruby_build'
 depends 'ruby_rbenv'
 depends 'postgresql'
 depends 'nodejs'

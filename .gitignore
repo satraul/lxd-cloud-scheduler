@@ -4,6 +4,10 @@
 # Log files (if you are not creating logs in debug mode, comment this)
 *.log
 
-# NFS files
-nfs/ubuntu1604
-nfs/ubuntu1604.root
+# Client cert and keys
+client.crt
+client.key
+
+# Synced container images
+shared/node/ubuntu1604
+shared/node/ubuntu1604.root
