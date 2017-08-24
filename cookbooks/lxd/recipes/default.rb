@@ -6,24 +6,24 @@
 
 execute "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
 
-package 'nodejs' do
-    action :upgrade
-end
+packages = ['python', 'make', 'gcc', 'g++', 'nodejs', 'zfs']
 
-package 'zfs' do
+packages.each do |pkg|
+  package pkg do
     action :upgrade
+  end
 end
 
 package 'lxd' do
-    default_release 'xenial-backports'
-    action :upgrade
+  default_release 'xenial-backports'
+  action :upgrade
 end
 
 execute 'cat /vagrant/preseed.yaml | lxd init --preseed' do
-    ignore_failure true
+  ignore_failure true
 end
 
 execute 'npm install' do
-    cwd '/vagrant/xterm-server'
-    action :run
+  cwd '/vagrant/xterm-server'
+  action :run
 end
