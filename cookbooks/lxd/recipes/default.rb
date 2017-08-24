@@ -23,12 +23,7 @@ execute 'cat /vagrant/preseed.yaml | lxd init --preseed' do
     ignore_failure true
 end
 
-git '/home/ubuntu/xterm.js' do
-    repository 'https://github.com/sourcelair/xterm.js.git'
-    action :sync
-end
-
 execute 'npm install' do
-    cwd '/home/ubuntu/xterm.js'
+    cwd '/vagrant/xterm-server'
     action :run
 end

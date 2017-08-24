@@ -1,0 +1,13 @@
+{
+  "name": "xterm-server",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "4.15.4",
+    "express-ws": "3.0.0",
+    "node-pty": "0.7.0",
+    "cors": "2.8.4"
+  },
+  "scripts": {
+    "start": "node app"
+  }
+}

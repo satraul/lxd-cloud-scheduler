@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
         config.vm.define "web-interface" do |subconfig|
             subconfig.vm.box = DEFAULT_BOX
             subconfig.vm.hostname = "web-interface"
-            # subconfig.vm.synced_folder 'shared/web-interface', '/vagrant', nfs: true
+            subconfig.vm.synced_folder 'shared/web-interface', '/vagrant'
             subconfig.vm.network "forwarded_port", guest: 3000, host: 8080
 
             # Provisioning using chef-solo
@@ -55,8 +55,8 @@ Vagrant.configure("2") do |config|
             subconfig.vm.box = DEFAULT_BOX
             subconfig.vm.hostname = "node-#{i}"
             subconfig.vm.synced_folder 'shared/node', '/vagrant'
-            subconfig.vm.network "forwarded_port", guest: 3000, host: 5010, protocol: 'tcp'
-            subconfig.vm.network "forwarded_port", guest: 3000, host: 5010, protocol: 'udp'
+            subconfig.vm.network "forwarded_port", guest: 3000, host: 5010 + i, protocol: 'tcp'
+            subconfig.vm.network "forwarded_port", guest: 3000, host: 5010 + i, protocol: 'udp'
 
             subconfig.vm.provision "chef_solo" do |chef|
                 chef.cookbooks_path = ["vendor/cookbooks", "cookbooks"]
